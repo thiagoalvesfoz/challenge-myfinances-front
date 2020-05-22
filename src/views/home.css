@@ -1,0 +1,22 @@
+.saldo{
+  font-weight: bold;
+  font-size: 32px;
+  
+}
+
+.negativo{
+  color: red;
+}
+
+.positivo{
+  color: green;
+}
+
+.btn, .mr{
+  margin-right: 5px !important;
+}
+
+.large {
+  width: 100% !important;
+  border: 1px solid #ced4da !important;
+}
