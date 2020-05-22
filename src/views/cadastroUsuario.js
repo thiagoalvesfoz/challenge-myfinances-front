@@ -6,6 +6,7 @@ import FormGroup from '../components/form-group';
 import UsuarioService from '../app/service/usuarioService';
 import { showSuccessMessage, showErrorMessage } from '../components/toastr'
 import {Button} from 'primereact/button';
+import {Password} from 'primereact/password';
 
 class CadastroUsuario extends React.Component {
 
@@ -47,9 +48,17 @@ class CadastroUsuario extends React.Component {
     this.props.history.push('/login')
   }
 
+  handleChange = (event) => {
+    //criando um método genérico em javascript
+    const value = event.target.value;
+    const name = event.target.name;
+    
+    this.setState({ [name] : value }) //interpolação
+  }
+
   render() {
     return (
-        <Card title="Cadastro de Usuário">
+        <Card title="Criar sua conta">
           <div className="row">
             <div className="col-lg-12">
               <div className="bs-component">
@@ -57,29 +66,33 @@ class CadastroUsuario extends React.Component {
                   <input  type="text"  
                           className="form-control" 
                           id="inputNome" 
-                          placeholder="Digite seu nome"
-                          onChange={e => this.setState({nome: e.target.value})} />
+                          placeholder="Digite o seu nome"
+                          name="nome"
+                          onChange={ this.handleChange } />
                 </FormGroup>
                 <FormGroup htmlFor="inputEmail" label="Email: *">
                   <input  type="email" 
                           className="form-control" 
                           id="inputEmail" 
-                          placeholder="Digite o Email"
-                          onChange={e => this.setState({email: e.target.value})} />
-                </FormGroup>
+                          placeholder="Digite o seu melhor e-mail"
+                          name="email"
+                          onChange={ this.handleChange } />
+                </FormGroup>                                     
                 <FormGroup htmlFor="inputSenha" label="Senha: *">
-                  <input  type="password" 
-                          className="form-control" 
-                          id="inputSenha" 
-                          placeholder="Password"
-                          onChange={e => this.setState({senha: e.target.value})} />
+                  <Password promptLabel="Digite uma senha" 
+                            weakLabel="Fraco" mediumLabel="Médio" strongLabel="Forte"
+                            className="large form-control"
+                            placeholder="Digite uma senha"
+                            name="senha"
+                            onChange={ this.handleChange } />                  
                 </FormGroup>
                 <FormGroup htmlFor="inputRepitaSenha" label="Repita a Senha: *">
-                  <input  type="password" 
-                          className="form-control" 
-                          id="inputRepitaSenha" 
-                          placeholder="Password"
-                          onChange={e => this.setState({senhaRepeticao: e.target.value})} />
+                  <Password promptLabel="Digite uma senha" 
+                            className="large form-control"
+                            placeholder="Digite novamente sua senha"
+                            feedback={false}
+                            name="senhaRepeticao"
+                            onChange={ this.handleChange } />                
                 </FormGroup>
                 <Button label="Cadastrar" 
                         icon="pi pi-user-plus"
@@ -91,7 +104,7 @@ class CadastroUsuario extends React.Component {
                         onClick={this.login} />
               </div>
             </div>
-          </div>
+          </div>          
         </Card>
     )
   }

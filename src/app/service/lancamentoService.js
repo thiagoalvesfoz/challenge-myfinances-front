@@ -52,7 +52,7 @@ class LancamentoService extends Api {
       params += `&mes=${filtro.mes}`;
 
     if(filtro.tipoLancamento)
-      params += `&tipo_lancamento=${filtro.tipoLancamento}`;
+      params += `&tipo=${filtro.tipoLancamento}`;
 
     if(filtro.descricao)
       params += `&descricao=${filtro.descricao}`;

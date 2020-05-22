@@ -4,7 +4,7 @@ import FormGroup from '../components/form-group';
 import { withRouter } from 'react-router-dom';
 
 import UsuarioService from '../app/service/usuarioService';
-
+import {Password} from 'primereact/password';
 import { showErrorMessage } from '../components/toastr';
 import {Button} from 'primereact/button';
 
@@ -23,14 +23,7 @@ class Login extends React.Component {
     senha: '',
   }
 
-  //chama o método autenticar em UsuarioService passando um objeto
   entrar = () => {
-
-    // if(!this.state.email || !this.state.senha){
-    //   showErrorMessage('Preencha todos os campos');
-    //   return false;
-    // }
-
     this.apiService.autenticar({
       email: this.state.email, 
       senha: this.state.senha
@@ -66,16 +59,17 @@ class Login extends React.Component {
                             aria-describedby="emailHelp" placeholder="Digite o Email" />                            
                     </FormGroup>
                     <FormGroup htmlFor='exampleInputPassword1' label="Senha: *"  >
-                      <input type="password" value={this.setState.senha}
-                            onChange={ event => this.setState({senha: event.target.value}) }
-                            className="form-control" id="exampleInputPassword1" 
-                            placeholder="Password" />
+                      <Password promptLabel="Digite uma senha"                             
+                                className="large form-control"
+                                placeholder="Digite a senha"
+                                feedback={false}
+                                onChange={ event => this.setState({senha: event.target.value}) } />
                     </FormGroup>
                     <Button label="Login" 
                             icon="pi pi-sign-in" 
                             className="mr p-button-info"
                             onClick={this.entrar} />
-                    <Button label="Cadastrar" 
+                    <Button label="Criar conta" 
                             icon="pi pi-user-plus" 
                             className="mr p-button-secondary"
                             onClick={this.prepareCadastrar} />

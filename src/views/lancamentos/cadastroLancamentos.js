@@ -3,9 +3,9 @@ import { withRouter } from 'react-router-dom';
 import Card from '../../components/card';
 import FormGroup from '../../components/form-group';
 import * as messages from '../../components/toastr';
+import AuthService from '../../app/service/auth'
 
 import LancamentoService from '../../app/service/lancamentoService';
-import LocalStorageService from '../../app/service/localStorageService';
 import {Dropdown} from 'primereact/dropdown';
 import {Button} from 'primereact/button';
 import {InputNumber} from 'primereact/inputnumber';
@@ -22,7 +22,7 @@ class CadastroLançamento extends React.Component {
     tipo: '',
     mes: '',
     valor: '',
-    ano: '',
+    ano: new Date().getFullYear(),
     descricao: '',
     status: '',
     usuario: '',
@@ -48,7 +48,7 @@ class CadastroLançamento extends React.Component {
 
   submit = () => {
 
-    const user = LocalStorageService.getItem('_usuario_logado');
+    const user =  AuthService.getUserAuth();
     const { descricao, mes, ano, valor, tipo } = this.state
     const lancamento = { descricao, mes, ano, valor, tipo, usuario: user.id }
 
@@ -132,13 +132,6 @@ class CadastroLançamento extends React.Component {
                             className="large" 
                             mode="decimal" 
                             useGrouping={false} />
-
-              {/* <input  id="inputAno" 
-                      type="text" 
-                      className="form-control"
-                      name="ano" 
-                      value={this.state.ano}
-                      onChange={ this.handleChange } /> */}
             </FormGroup>
           </div>
 

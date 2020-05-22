@@ -1,8 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom'
 import LancamentoService from '../../app/service/lancamentoService'
+import AuthService from '../../app/service/auth'
 
-import LocalStorageService from '../../app/service/localStorageService'
 import { showErrorMessage, showSuccessMessage } from '../../components/toastr' 
 import Card from '../../components/card'
 import FormGroup from '../../components/form-group'
@@ -31,8 +31,8 @@ class ConsultaLancamento extends React.Component {
     listNotFound: 'Nada para mostrar'
   };
 
-  componentDidMount(){
-    this.setState({ ano : 2020 });
+  componentDidMount(){    
+    this.setState({ ano : new Date().getFullYear() });
     this.buscar();
   }
 
@@ -46,7 +46,7 @@ class ConsultaLancamento extends React.Component {
 
   buscar = () => {
 
-    const user = LocalStorageService.getItem('_usuario_logado');
+    const user = AuthService.getUserAuth();
 
     const filtro = {
       usuario: user.id,
@@ -74,14 +74,11 @@ class ConsultaLancamento extends React.Component {
     this.service
       .deleteById(id).then( () => {        
 
-        const lancamentos = this.state.lancamentos;
-        
-        const index = lancamentos.indexOf(this.state.lancamentoDeletar);
-        
+        const lancamentos = this.state.lancamentos;        
+        const index = lancamentos.indexOf(this.state.lancamentoDeletar);        
         lancamentos.splice(index, 1);
        
-        this.setState({lancamentos: lancamentos, showConfirmDialog: false});
-        
+        this.setState({lancamentos: lancamentos, showConfirmDialog: false});        
         showSuccessMessage('Lançamento deletado com sucesso');
 
     }).catch(err => {
@@ -136,7 +133,7 @@ class ConsultaLancamento extends React.Component {
                 className="p-button-secondary" 
                 onClick={this.cancelarExclusao} />
       </div>
-    );
+    )
 
     return (     
       <Card title="Consulta Lançamento">
@@ -164,7 +161,7 @@ class ConsultaLancamento extends React.Component {
                           options={ meses } 
                           className="large"
                           onChange={ select => this.setState({mes: select.target.value}) }
-                          placeholder="Seleciono o Mês"/>
+                          placeholder="Selecione o Mês"/>
               </FormGroup>
 
               <FormGroup label="Tipo de Lançamento: *" htmlFor="inputLancamento">
