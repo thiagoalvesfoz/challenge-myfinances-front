@@ -7,6 +7,7 @@ import { showErrorMessage, showSuccessMessage } from '../../components/toastr'
 import Card from '../../components/card'
 import FormGroup from '../../components/form-group'
 import TableLancamentos from './lancamentosTable'
+import {InputNumber} from 'primereact/inputnumber';
 
 // prime react
 import {Dialog} from 'primereact/dialog';
@@ -21,7 +22,7 @@ class ConsultaLancamento extends React.Component {
   }
 
   state = {
-    ano: '',
+    ano: null,
     mes: '',
     descricao: '',
     tipoLancamento: '',
@@ -148,12 +149,12 @@ class ConsultaLancamento extends React.Component {
                         onChange={ field => this.setState({descricao: field.target.value})} />
               </FormGroup>
               <FormGroup label="Ano: *" htmlFor="inputAno" >
-                <input  type="text" 
-                        className="form-control" 
-                        id="inputAno" 
-                        placeholder="Digite o Ano"
-                        value={ this.state.ano }
-                        onChange={ field => this.setState({ano: field.target.value})} />
+                <InputNumber  className="large" 
+                              mode="decimal" 
+                              max={9999}                              
+                              value={ this.state.ano }
+                              useGrouping={false}
+                              onChange={ (e) => this.setState({ano: e.target.value})} />                
               </FormGroup>
 
               <FormGroup label="Mês: *" htmlFor="inputMes">

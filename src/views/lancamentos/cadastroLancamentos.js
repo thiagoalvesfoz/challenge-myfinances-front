@@ -21,7 +21,7 @@ class CadastroLançamento extends React.Component {
     id: null,
     tipo: '',
     mes: '',
-    valor: '',
+    valor: 0,
     ano: new Date().getFullYear(),
     descricao: '',
     status: '',
@@ -46,21 +46,19 @@ class CadastroLançamento extends React.Component {
     this.props.history.push('/consulta-lancamento')
   }
 
-  submit = () => {
-
+   submit = () =>  {
+ 
     const user =  AuthService.getUserAuth();
     const { descricao, mes, ano, valor, tipo } = this.state
     const lancamento = { descricao, mes, ano, valor, tipo, usuario: user.id }
 
-    try{
+    try{      
         this.service.validateFields(lancamento);
-    } catch(err) {
+    } catch(err) {       
         const erros = err.mensagens
         erros.forEach(msg => messages.showErrorMessage(msg))
         return;
-    }
-
-    
+    }  
 
     this.service.salvar(lancamento).then( response => {
       this.props.history.push('/consulta-lancamento')
@@ -71,19 +69,18 @@ class CadastroLançamento extends React.Component {
     })
   }
 
-  atualizar = () => {
+  atualizar = () => {   
     
     const { descricao, mes, ano, valor, tipo, id, usuario, status } = this.state
     const lancamento = { descricao, mes, ano, valor, tipo, id, usuario, status }
-
-    console.log(lancamento)
-
+    
     this.service.atualizar(lancamento).then( response => {
       this.props.history.push('/consulta-lancamento')
       messages.showSuccessMessage('Lançamento atualizado com sucesso.')
     }).catch(err => {
       messages.showErrorMessage(err.response.data)
     })
+
   }
 
 
@@ -117,6 +114,7 @@ class CadastroLançamento extends React.Component {
                       type="text" 
                       className="form-control"
                       name="descricao" 
+                      placeholder="Digite uma descrição para o lançamento"
                       value={this.state.descricao}
                       onChange={ this.handleChange }/>
             </FormGroup>
@@ -131,6 +129,7 @@ class CadastroLançamento extends React.Component {
                             onChange={ this.handleChange } 
                             className="large" 
                             mode="decimal" 
+                            max={9999} 
                             useGrouping={false} />
             </FormGroup>
           </div>
@@ -158,6 +157,7 @@ class CadastroLançamento extends React.Component {
                             className="large" 
                             mode="currency" 
                             currency="BRL"
+                            max={9999999999} 
                             locale="pt-BR" />
             </FormGroup>
           </div>
@@ -194,7 +194,7 @@ class CadastroLançamento extends React.Component {
                 : (<Button onClick={ this.submit } label="Salvar" icon="pi pi-check" className="mr p-button-info" /> )
             }
             <Button onClick={ this.cancelar } label="Cancelar" icon="pi pi-times" className="mr p-button-secondary" />
-          </div>
+          </div>          
         </div>
       </Card>
     )

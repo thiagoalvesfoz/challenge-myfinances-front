@@ -13,10 +13,44 @@
 }
 
 .btn, .mr{
-  margin-right: 5px !important;
+  margin: 10px 5px !important;
 }
 
 .large {
   width: 100% !important;
   border: 1px solid #ced4da !important;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.sidebar {
+  font-size:  20px;
+  font-weight: bold;
+  width: 700px;
+  margin: auto 50px;
+}
+
+.center .navbar-nav {
+  display: flex;
+  flex-direction: row;  
+  justify-content: space-between;
+}
+
+@media (max-width: 500px) {
+  .center .navbar-nav {
+    flex-direction: column;
+    margin: 20px auto;
+  }
+}
+
+@media(max-width: 580px) {
+  * {
+    text-align: center;
+  }
 }

@@ -7,6 +7,7 @@ import UsuarioService from '../app/service/usuarioService';
 import {Password} from 'primereact/password';
 import { showErrorMessage } from '../components/toastr';
 import {Button} from 'primereact/button';
+import {ProgressSpinner} from 'primereact/progressspinner';
 
 import { AuthContext } from '../main/ProvedorDeAutentificacao'
 
@@ -21,6 +22,7 @@ class Login extends React.Component {
   state = {
     email: '',
     senha: '',
+    loading: false,
   }
 
   entrar = () => {
@@ -29,7 +31,8 @@ class Login extends React.Component {
       showErrorMessage('Preencha todos os campos')
       return false;
     }
-
+    
+    this.setState( { loading: true } )
     this.apiService.autenticar({
       email: this.state.email, 
       senha: this.state.senha
@@ -40,8 +43,11 @@ class Login extends React.Component {
       this.props.history.push('/home');
     })
     .catch( erro => {
+      this.setState({loading: false})
       showErrorMessage(erro.response.data);
     })
+
+    
   }
 
   //caso o usuário clique em cadastrar esse método chama a página de cadastro
@@ -54,7 +60,20 @@ class Login extends React.Component {
       this.entrar();
   }
 
-  render(){
+  
+
+  render() {
+
+    const load = () => {
+      if(this.state.loading) {
+        return (
+          <ProgressSpinner style={
+            {width: '50px', height: '50px', display: 'block', margin: '40px auto'}} 
+            strokeWidth="8" fill="#EEEEEE" animationDuration=".5s"/> 
+        )
+      }
+    }
+
     return (
       <div className="row">
         <div className="col-md-6" style={{position: 'relative', margin: 'auto'}}>
@@ -86,6 +105,7 @@ class Login extends React.Component {
                             className="mr p-button-secondary"
                             onClick={this.prepareCadastrar} />
                   </fieldset>
+                  { load() }
                 </div>
               </div>
             </div>
