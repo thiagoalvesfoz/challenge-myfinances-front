@@ -7,6 +7,7 @@ import UsuarioService from '../app/service/usuarioService';
 import { showSuccessMessage, showErrorMessage } from '../components/toastr'
 import {Button} from 'primereact/button';
 import {Password} from 'primereact/password';
+import Alert from '../components/Alert'
 
 class CadastroUsuario extends React.Component {
 
@@ -19,7 +20,8 @@ class CadastroUsuario extends React.Component {
     nome: '',
     email: '',
     senha: '',
-    senhaRepeticao: ''
+    senhaRepeticao: '',
+    showConfirmDialog: true
   }
 
   cadastrar = () => {
@@ -54,6 +56,11 @@ class CadastroUsuario extends React.Component {
     const name = event.target.name;
     
     this.setState({ [name] : value }) //interpolação
+  }
+
+  handleEnter = (e) => {
+    if(e.key === 'Enter')
+      this.cadastrar();
   }
 
   render() {
@@ -92,6 +99,7 @@ class CadastroUsuario extends React.Component {
                             placeholder="Digite novamente sua senha"
                             feedback={false}
                             name="senhaRepeticao"
+                            onKeyPress={ this.handleEnter }
                             onChange={ this.handleChange } />                
                 </FormGroup>
                 <Button label="Cadastrar" 
@@ -100,11 +108,12 @@ class CadastroUsuario extends React.Component {
                         onClick={this.cadastrar} />
                 <Button label="Login" 
                         icon="pi pi-sign-in" 
-                        className="mr p-button-secondary"
+                        className="mr p-button-secondary"                        
                         onClick={this.login} />
-              </div>
+              </div> 
+              <Alert />
             </div>
-          </div>          
+          </div> 
         </Card>
     )
   }

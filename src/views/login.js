@@ -24,6 +24,12 @@ class Login extends React.Component {
   }
 
   entrar = () => {
+
+    if(!this.state.email || !this.state.senha) {
+      showErrorMessage('Preencha todos os campos')
+      return false;
+    }
+
     this.apiService.autenticar({
       email: this.state.email, 
       senha: this.state.senha
@@ -41,6 +47,11 @@ class Login extends React.Component {
   //caso o usuário clique em cadastrar esse método chama a página de cadastro
   prepareCadastrar = () => {
     this.props.history.push('/cadastro-usuarios');
+  }
+
+  handleEnter = (e) => {
+    if(e.key === 'Enter')
+      this.entrar();
   }
 
   render(){
@@ -63,6 +74,7 @@ class Login extends React.Component {
                                 className="large form-control"
                                 placeholder="Digite a senha"
                                 feedback={false}
+                                onKeyPress={ this.handleEnter }
                                 onChange={ event => this.setState({senha: event.target.value}) } />
                     </FormGroup>
                     <Button label="Login" 
