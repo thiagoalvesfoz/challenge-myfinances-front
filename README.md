@@ -1,6 +1,53 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Bem vindo
 
-## Available Scripts
+Este projeto foi desenvolvido em ReactJS para o front e Spring Boot no back.
+#### Para ver o Back-End da Aplicação [clique aqui](https://github.com/thiagoalvesfoz/challenge-myfinances "challenge-myfinances") 
+
+O objetivo desse projeto é realizar operações CRUD básico que de um sistema de gerenciamento. Neste sistema, você poderá criar, alterar, remover e ler informações.
+
+
+## Tecnologias Utilizadas
+```
+* Spring Boot
+* React JS
+* PostgreSQL
+* Insomnia
+* Java 11
+* VSCode
+* Eclipse STS
+```
+
+## Home da Aplicação
+
+![Home da Aplicação](https://i.ibb.co/vjZHYTr/home.jpg)
+
+A primeira página que o usuário vê após ser autenticado. Nela é possível ver o saldo atual de todos os lançamentos efetivados, cadastrar novos lançamentos e ver lançamentos já cadastrados
+
+## Cadastro de Usuário
+
+![Tela de Cadastro](https://i.ibb.co/gSYZDJ2/tela-cadastro.jpg)
+
+Tela de cadastro simples, sem confirmação de e-mail, mas inteligente o suficiente para ver a força da sua senha.
+
+## Cadastro de novas receitas ou despesas
+
+![Tela de cadastro de lançamentos](https://i.ibb.co/jGrrLGS/tela-cadastro-lan-amento.jpg)
+
+Tela de cadastro, é possível adicionar uma descrição, o ano, mês, valor e especificar o tipo do lançamento (Receita ou Despesas)
+
+## Consulta de Lançamentos
+![Tela de consulta de lançamentos](https://i.ibb.co/4881BmK/tela-consulta.jpg)
+
+Caso queira ver um lançamento específico, este é o lugar, você pode filtrar por descrição, mês, ano ou tipo. pode também, deletar, alterar o status do lançamento ou editar por completo.
+
+## Tela de Login
+
+![Tela de login da aplicação](https://i.ibb.co/Sd0LyH4/tela-Login.jpg)
+
+Tela de login simples e elegante.
+
+
+## HOW TO INSTALL
 
 In the project directory, you can run:
 
