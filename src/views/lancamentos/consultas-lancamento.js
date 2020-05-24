@@ -14,6 +14,8 @@ import {Dialog} from 'primereact/dialog';
 import {Button} from 'primereact/button';
 import {Dropdown} from 'primereact/dropdown';
 
+import './lancamento.css'
+
 class ConsultaLancamento extends React.Component {
 
   constructor(){
@@ -123,7 +125,7 @@ class ConsultaLancamento extends React.Component {
     const tipo = this.service.getTypeLaunch();
 
     const confirmDialogFooter = (
-      <div>
+      <div class="btn-dialog">
         <Button label="Confirmar" 
                 icon="pi pi-check" 
                 className="p-button-danger"

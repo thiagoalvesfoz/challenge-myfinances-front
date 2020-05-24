@@ -24,7 +24,6 @@ class ProvedorAutenticado extends Component {
   encerrarSessao = () => {
     AuthService.destroySession();
     this.setState( {isAutenticado: false, usuarioAutenticado: null } );
-
   } 
 
   render() {
